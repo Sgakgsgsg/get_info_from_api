@@ -1,0 +1,86 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GitHub User Info</title>
+
+    <style>
+        /* Add some basic styles for the card */
+        body {
+          font-family: Arial, sans-serif;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          height: 100vh;
+          margin: 0;
+        }
+
+        .card {
+          width: 300px;
+          padding: 20px;
+          border: 1px solid #ccc;
+          border-radius: 8px;
+          box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        h2 {
+          color: #333;
+        }
+
+        p {
+          color: #666;
+        }
+
+        /* Style the buttons */
+        .btn {
+          margin: 5px 0;
+          padding: 10px;
+          background-color: #007BFF;
+          color: #fff;
+          border: none;
+          border-radius: 4px;
+          cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+
+<!-- Card Container -->
+<div class="card">
+    <!-- Card Content -->
+    <h2>Hitesh Chaudhary</h2>
+    <button type="button" id="photo" class="btn">Photo</button>
+    <button type="button" id="followers" class="btn">Followers</button>
+    <button type="button" id="blog" class="btn">Blog</button>
+</div>
+
+<script>
+    const requestUrl = 'https://api.github.com/users/hiteshchoudhary';
+    const xhr = new XMLHttpRequest();
+    
+    xhr.onreadystatechange = function () {
+        if (xhr.readyState === 4) {
+            const data = JSON.parse(xhr.responseText);
+
+            document.getElementById('photo').addEventListener('click', function () {
+                console.log(data.avatar_url);
+            });
+
+            document.getElementById('followers').addEventListener('click', function () {
+                console.log(data.followers);
+            });
+
+            document.getElementById('blog').addEventListener('click', function () {
+                console.log(data.blog);
+            });
+        }
+    };
+
+    xhr.open('GET', requestUrl);
+    xhr.send();
+</script>
+
+</body>
+</html>
